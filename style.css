@@ -1,0 +1,121 @@
+/* 
+        :root {
+            --color-primary: #007bff;
+            --keyboard-scale: 1;
+        }
+        
+        .accessibility-panel {
+            position: fixed;
+            right: 20px;
+            bottom: 80px;
+            width: 300px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            z-index: 1050;
+            display: none;
+            padding: 15px;
+        }
+        
+        .accessibility-toggle {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            z-index: 1050;
+            cursor: pointer;
+        }
+        
+        .virtual-keyboard {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #f8f9fa;
+            padding: 10px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            transform: scale(var(--keyboard-scale));
+            transform-origin: bottom center;
+            display: none;
+            z-index: 1040;
+        }
+        
+        .keyboard-row {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 5px;
+        }
+        
+        .keyboard-key {
+            width: 50px;
+            height: 50px;
+            margin: 0 3px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .keyboard-key:hover {
+            background: #e9ecef;
+        }
+        
+        .keyboard-key.wide {
+            width: 100px;
+        }
+        
+        .accessibility-option {
+            margin-bottom: 10px;
+        }
+        
+        /* Accessibility classes */
+        .accessibility-blindness {
+            /* Styles for blindness profile */
+        }
+        
+        .accessibility-motor {
+            /* Styles for motor impairment profile */
+        }
+        
+        .accessibility-colorblind {
+            /* Styles for colorblind profile */
+            filter: grayscale(100%);
+        }
+        
+        .accessibility-visually-impaired {
+            /* Styles for visually impaired profile */
+            font-size: 1.2em !important;
+        }
+        
+        .accessibility-epilepsy {
+            /* Styles for epilepsy profile */
+        }
+        
+        .accessibility-dyslexia {
+            /* Styles for dyslexia profile */
+            font-family: 'Comic Sans MS', sans-serif !important;
+        }
+        
+        .accessibility-monochrome {
+            filter: grayscale(100%);
+        }
+        
+        .accessibility-dark-contrast {
+            background: #000 !important;
+            color: #fff !important;
+        }
+        
+        .accessibility-bright-contrast {
+            background: #fff !important;
+            color: #000 !important;
+        } 

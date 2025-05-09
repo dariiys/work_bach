@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Product example for Bootstrap with enhanced accessibility features">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>Product example · Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom styles for this template -->
+    <style>
+      :root {
+          --font-size-base: 1rem;
+          --line-height-base: 1.5;
+          --color-primary: #4e73df;
+          --color-secondary: #858796;
+          --color-success: #1cc88a;
+          --color-info: #36b9cc;
+          --color-warning: #f6c23e;
+          --color-danger: #e74a3b;
+          --color-dark: #5a5c69;
+          --color-light: #f8f9fc;
+          --text-color: #212529;
+          --bg-color: #fff;
+          --link-color: #4e73df;
+          --keyboard-scale: 1;
+      }
+      
+      body {
+          padding-top: 3.5rem;
+          font-size: var(--font-size-base);
+          line-height: var(--line-height-base);
+          transition: all 0.3s ease;
+          color: var(--text-color);
+          background-color: var(--bg-color);
+      }
+      
+      /* Accessibility profiles */
+      body.accessibility-blindness {
+          --text-color: #fff !important;
+          --bg-color: #000 !important;
+          --link-color: #4da6ff !important;
+      }
+      
+      body.accessibility-motor {
+          --color-primary: #ff6b6b;
+          --color-secondary: #5a6268;
+      }
+      
+      body.accessibility-colorblind {
+          filter: grayscale(100%);
+      }
+      
+      body.accessibility-visually-impaired {
+          --font-size-base: 1.25rem;
+          --line-height-base: 1.8;
+      }
+      
+      body.accessibility-epilepsy * {
+          animation: none !important;
+          transition: none !important;
+      }
+      
+      body.accessibility-dyslexia {
+          font-family: 'Calibri', 'Arial', sans-serif;
+          letter-spacing: 0.05em;
+          word-spacing: 0.1em;
+          line-height: 1.8;
+      }
+      
+      body.accessibility-monochrome {
+          filter: grayscale(100%);
+      }
+      
+      body.accessibility-dark-contrast {
+          --text-color: #fff !important;
+          --bg-color: #000 !important;
+          --color-primary: #ff6b6b !important;
+          --color-secondary: #5a6268 !important;
+      }
+      
+      body.accessibility-bright-contrast {
+          --text-color: #000 !important;
+          --bg-color: #fff !important;
+          --color-primary: #0056b3 !important;
+          --color-secondary: #5a6268 !important;
+      }
+
+      /* Enhanced colors for better visual appearance */
+      .bg-primary {
+          background-color: var(--color-primary) !important;
+      }
+      
+      .bg-secondary {
+          background-color: var(--color-secondary) !important;
+      }
+      
+      .bg-success {
+          background-color: var(--color-success) !important;
+      }
+      
+      .bg-info {
+          background-color: var(--color-info) !important;
+      }
+      
+      .bg-warning {
+          background-color: var(--color-warning) !important;
+      }
+      
+      .bg-danger {
+          background-color: var(--color-danger) !important;
+      }
+      
+      .bg-dark {
+          background-color: var(--color-dark) !important;
+      }
+      
+      .bg-light {
+          background-color: var(--color-light) !important;
+      }
+      
+      .text-primary {
+          color: var(--color-primary) !important;
+      }
+      
+      .btn-primary {
+          background-color: var(--color-primary);
+          border-color: var(--color-primary);
+      }
+      
+      .btn-secondary {
+          background-color: var(--color-secondary);
+          border-color: var(--color-secondary);
+      }
+
+      .jumbotron {
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+        margin-bottom: 0;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-info) 100%);
+        color: white;
+      }
+
+      .jumbotron p:last-child {
+        margin-bottom: 0;
+      }
+
+      .jumbotron-heading {
+        font-weight: 300;
+        color: white;
+      }
+
+      .jumbotron .container {
+        max-width: 40rem;
+      }
+
+      footer {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+        color: var(--text-color);
+        background-color: var(--bg-color);
+        background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-secondary) 100%);
+        color: white;
+      }
+
+      footer p {
+        margin-bottom: .25rem;
+      }
+
+      .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .1); }
+      
+      /* Accessibility controls - fixed to viewport */
+      .accessibility-controls {
+          position: fixed;
+          bottom: 0;
+          right: 0;
+          left: 0;
+          z-index: 1000;
+          background-color: var(--bg-color);
+          border-top: 1px solid #ddd;
+          padding: 10px 20px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+      }
+      
+      .accessibility-btn {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          background-color: var(--color-primary);
+          color: white;
+          border: none;
+          font-size: 1.5rem;
+          cursor: pointer;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 1001;
+      }
+      
+      .accessibility-panel {
+          position: fixed;
+          bottom: 70px;
+          right: 20px;
+          width: 350px;
+          max-height: calc(100vh - 150px);
+          overflow-y: auto;
+          background-color: var(--bg-color);
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          padding: 15px;
+          box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+          display: none;
+          color: var(--text-color);
+          z-index: 1050;
+      }
+      
+      .accessibility-section {
+          margin-bottom: 15px;
+          padding-bottom: 15px;
+          border-bottom: 1px solid #eee;
+      }
+      
+      .accessibility-section h4 {
+          margin-top: 0;
+          font-size: 1.1rem;
+          color: var(--color-primary);
+      }
+      
+      .accessibility-option {
+          margin-bottom: 8px;
+          display: flex;
+          align-items: center;
+      }
+      
+      .accessibility-option label {
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          margin-bottom: 0;
+          flex-grow: 1;
+          color: var(--text-color);
+      }
+      
+      .accessibility-option input {
+          margin-right: 10px;
+          width: 18px;
+          height: 18px;
+      }
+      
+      .accessibility-option-icon {
+          width: 24px;
+          margin-right: 8px;
+          text-align: center;
+          color: var(--color-primary);
+      }
+      
+      /* Virtual Keyboard - fixed to viewport */
+      .virtual-keyboard {
+          display: none;
+          position: fixed;
+          bottom: 70px;
+          left: 0;
+          right: 0;
+          width: 100%;
+          max-width: 100%;
+          background-color: var(--bg-color);
+          border-top: 1px solid #ddd;
+          padding: 10px;
+          box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+          z-index: 1040;
+          transition: all 0.3s ease;
+      }
+      
+      .keyboard-container {
+          max-width: 800px;
+          margin: 0 auto;
+      }
+      
+      .keyboard-row {
+          display: flex;
+          justify-content: center;
+          margin-bottom: 5px;
+      }
+      
+      .keyboard-key {
+          flex: 1;
+          max-width: 60px;
+          height: 50px;
+          margin: 0 3px;
+          background-color: var(--bg-color);
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          user-select: none;
+          color: var(--text-color);
+          font-weight: bold;
+          transition: all 0.2s;
+      }
+      
+      .keyboard-key:hover {
+          background-color: var(--color-light);
+          transform: translateY(-2px);
+      }
+      
+      .keyboard-key.space {
+          flex: 5;
+          max-width: 400px;
+      }
+      
+      .keyboard-controls {
+          display: flex;
+          justify-content: space-between;
+          margin-top: 10px;
+          max-width: 800px;
+          margin: 10px auto 0;
+      }
+      
+      .keyboard-resize {
+          display: flex;
+          align-items: center;
+      }
+      
+      .keyboard-resize-btn {
+          width: 30px;
+          height: 30px;
+          background-color: var(--color-primary);
+          color: white;
+          border: none;
+          border-radius: 3px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+      
+      /* Focus styles */
+      a:focus, button:focus, input:focus, select:focus, textarea:focus {
+          outline: 3px solid var(--color-primary);
+          outline-offset: 2px;
+      }
+      
+      /* Skip link */
+      .skip-link {
+          position: absolute;
+          top: -40px;
+          left: 0;
+          background: var(--color-dark);
+          color: white;
+          padding: 8px;
+          z-index: 100;
+          transition: top 0.3s;
+      }
+      
+      .skip-link:focus {
+          top: 0;
+      }
+      
+      /* Fix for navbar in high contrast mode */
+      .navbar-dark .navbar-brand,
+      .navbar-dark .navbar-nav .nav-link {
+          color: var(--navbar-text-color, rgba(255, 255, 255, 0.9)) !important;
+      }
+      
+      .navbar-dark .navbar-brand:hover,
+      .navbar-dark .navbar-nav .nav-link:hover {
+          color: var(--navbar-text-hover, white) !important;
+      }
+      
+      .navbar-dark .navbar-brand.active,
+      .navbar-dark .navbar-nav .nav-link.active {
+          color: var(--navbar-text-active, white) !important;
+      }
+      
+      /* Fix for card text */
+      .card {
+          background-color: var(--bg-color);
+          color: var(--text-color);
+          border: none;
+          box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+      }
+      
+      .card-text {
+          color: var(--text-color) !important;
+      }
+      
+      .text-muted {
+          color: var(--text-muted-color, #858796) !important;
+      }
+      
+      body.accessibility-dark-contrast .text-muted,
+      body.accessibility-blindness .text-muted {
+          --text-muted-color: #ccc !important;
+      }
+      
+      body.accessibility-dark-contrast .navbar-dark,
+      body.accessibility-blindness .navbar-dark {
+          --navbar-text-color: #ccc !important;
+          --navbar-text-hover: #fff !important;
+          --navbar-text-active: #fff !important;
+      }
+      
+      .keyboard-focused {
+          outline: 3px solid var(--color-primary) !important;
+          outline-offset: 2px !important;
+          box-shadow: 0 0 0 3px rgba(78, 115, 223, 0.5) !important;
+          position: relative;
+      }
+      .keyboard-focused::after {
+          content: '';
+          position: absolute;
+          top: -3px;
+          left: -3px;
+          right: -3px;
+          bottom: -3px;
+          border: 2px dashed var(--color-primary);
+          pointer-events: none;
+      }
+      .keyboard-navigation *:focus {
+          outline: 3px solid var(--color-primary) !important;
+      }
+      .voice-control {
+          flex: 1;
+          max-width: 80px;
+      }
+      .voice-control.active {
+          background-color: var(--color-danger) !important;
+          color: white !important;
+      }
+      
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      
+      /* Fix for first section */
+      .carousel {
+        margin-top: -3.5rem;
+      }
+      
+      .carousel-item {
+        height: 32rem;
+        background-color: var(--color-dark);
+      }
+      
+      .carousel-item > img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        min-width: 100%;
+        height: 32rem;
+        object-fit: cover;
+      }
+      
+      .carousel-caption {
+        bottom: 3rem;
+        z-index: 10;
+      }
+      
+      .marketing {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+      }
+      
+      .featurette-divider {
+        margin: 5rem 0;
+      }
+    </style>
+</head>
+<body>
+    <!-- Skip to main content link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="#">Accessible Shop</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Products</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact</a>
+            </li>
+          </ul>
+          <form class="form-inline mt-2 mt-md-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+    </header>
+
+    <main role="main" id="main-content">
+
+      <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#myCarousel" data-slide-to="1"></li>
+          <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="https://source.unsplash.com/random/1200x600?technology" alt="Technology products">
+            <div class="container">
+              <div class="carousel-caption text-left">
+                <h1>Premium Products</h1>
+                <p>Discover our high-quality technology products designed for everyone.</p>
+                <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse collection</a></p>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="https://source.unsplash.com/random/1200x600?accessibility" alt="Accessibility features">
+            <div class="container">
+              <div class="carousel-caption">
+                <h1>Accessibility First</h1>
+                <p>We design with all users in mind, ensuring everyone can use our products.</p>
+                <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="https://source.unsplash.com/random/1200x600?support" alt="Customer support">
+            <div class="container">
+              <div class="carousel-caption text-right">
+                <h1>24/7 Support</h1>
+                <p>Our team is always ready to help you with any questions or issues.</p>
+                <p><a class="btn btn-lg btn-primary" href="#" role="button">Contact us</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+
+
+      <!-- Marketing messaging and featurettes -->
+      <div class="container marketing">
+
+        <!-- Three columns of text below the carousel -->
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="card mb-4 shadow-sm">
+              <div class="card-body text-center">
+                <svg class="bd-placeholder-img rounded-circle mb-3" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#4e73df"/><text x="50%" y="50%" fill="#fff" dy=".3em" font-size="80">1</text></svg>
+                <h2>Easy to Use</h2>
+                <p class="card-text">Our products are designed with intuitive interfaces that anyone can use, regardless of technical skill level.</p>
+                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+              </div>
+            </div>
+          </div><!-- /.col-lg-4 -->
+          <div class="col-lg-4">
+            <div class="card mb-4 shadow-sm">
+              <div class="card-body text-center">
+                <svg class="bd-placeholder-img rounded-circle mb-3" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#1cc88a"/><text x="50%" y="50%" fill="#fff" dy=".3em" font-size="80">2</text></svg>
+                <h2>Accessible</h2>
+                <p class="card-text">Built with accessibility in mind, ensuring everyone can benefit from our technology solutions.</p>
+                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+              </div>
+            </div>
+          </div><!-- /.col-lg-4 -->
+          <div class="col-lg-4">
+            <div class="card mb-4 shadow-sm">
+              <div class="card-body text-center">
+                <svg class="bd-placeholder-img rounded-circle mb-3" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#36b9cc"/><text x="50%" y="50%" fill="#fff" dy=".3em" font-size="80">3</text></svg>
+                <h2>Reliable</h2>
+                <p class="card-text">High-quality components and rigorous testing ensure our products stand the test of time.</p>
+                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+              </div>
+            </div>
+          </div><!-- /.col-lg-4 -->
+        </div><!-- /.row -->
+
+
+        <!-- START THE FEATURETTES -->
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
+            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          </div>
+          <div class="col-md-5">
+            <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" src="https://source.unsplash.com/random/500x500?product1" alt="Product feature 1">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-7 order-md-2">
+            <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
+            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          </div>
+          <div class="col-md-5 order-md-1">
+            <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" src="https://source.unsplash.com/random/500x500?product2" alt="Product feature 2">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
+            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          </div>
+          <div class="col-md-5">
+            <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" src="https://source.unsplash.com/random/500x500?product3" alt="Product feature 3">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <!-- /END THE FEATURETTES -->
+
+      </div><!-- /.container -->
+
+
+      <!-- FOOTER -->
+      <footer class="container">
+        <p class="float-right"><a href="#">Back to top</a></p>
+        <p>&copy; 2023 Accessible Shop, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+      </footer>
+    </main>
+
+    <!-- Accessibility Controls - fixed to viewport bottom -->
+    <div class="accessibility-controls">
+        <button class="accessibility-btn" id="accessibilityToggle" aria-label="Accessibility settings" aria-expanded="false">
+            <i class="fas fa-universal-access"></i>
+        </button>
+        <div class="accessibility-panel" id="accessibilityPanel">
+            <div class="accessibility-section">
+                <h4><i class="fas fa-user-tag"></i> Accessibility Profiles</h4>
+                
+                <div class="accessibility-option">
+                    <label>
+                        <input type="checkbox" id="blindnessToggle">
+                        <span class="accessibility-option-icon"><i class="fas fa-eye-slash"></i></span>
+                        Blindness Mode
+                    </label>
+                </div>
+                
+                <div class="accessibility-option">
+                    <label>
+                        <input type="checkbox" id="motorToggle">
+                        <span class="accessibility-option-icon"><i class="fas fa-hand-paper"></i></span>
+                        Motor Skills Support
+                    </label>
+                </div>
+                
+                <div class="accessibility-option">
+                    <label>
+                        <input type="checkbox" id="colorblindToggle">
+                        <span class="accessibility-option-icon"><i class="fas fa-palette"></i></span>
+                        Color Blindness Mode
+                    </label>
+                </div>
+                
+                <div class="accessibility-option">
+                    <label>
+                        <input type="checkbox" id="visuallyImpairedToggle">
+                        <span class="accessibility-option-icon"><i class="fas fa-low-vision"></i></span>
+                        Visually Impaired
+                    </label>
+                </div>
+                
+                <div class="accessibility-option">
+                    <label>
+                        <input type="checkbox" id="epilepsyToggle">
+                        <span class="accessibility-option-icon"><i class="fas fa-brain"></i></span>
+                        Epilepsy Safe
+                    </label>
+                </div>
+                
+                <div class="accessibility-option">
+                    <label>
+                        <input type="checkbox" id="dyslexiaToggle">
+                        <span class="accessibility-option-icon"><i class="fas fa-font"></i></span>
+                        Dyslexia Friendly
+                    </label>
+                </div>
+            </div>
+            
+            <div class="accessibility-section">
+                <h4><i class="fas fa-compass"></i> Navigation Adjustment</h4>
+                
+                <div class="accessibility-option">
+                    <label>
+                        <input type="checkbox" id="screenReaderToggle">
+                        <span class="accessibility-option-icon"><i class="fas fa-assistive-listening-systems"></i></span>
+                        Screen Reader Mode
+                    </label>
+                </div>
+                
+                <div class="accessibility-option">
+                    <label>
+                        <input type="checkbox" id="keyboardNavToggle">
+                        <span class="accessibility-option-icon"><i class="fas fa-keyboard"></i></span>
+                        Keyboard Navigation
+                    </label>
+                </div>
+                
+                <div class="accessibility-option">
+                    <label>
+                        <input type="checkbox" id="textReaderToggle">
+                        <span class="accessibility-option-icon"><i class="fas fa-book-reader"></i></span>
+                        Text Reader
+                    </label>
+                </div>
+            </div>
+            
+            <div class="accessibility-section">
+                <h4><i class="fas fa-adjust"></i> Color Adjustment</h4>
+                
+                <div class="accessibility-option">
+                    <label>
+                        <input type="radio" name="colorMode" id="monochromeToggle">
+                        <span class="accessibility-option-icon"><i class="fas fa-moon"></i></span>
+                        Monochrome
+                    </label>
+                </div>
+                
+                <div class="accessibility-option">
+                    <label>
+                        <input type="radio" name="colorMode" id="darkContrastToggle">
+                        <span class="accessibility-option-icon"><i class="fas fa-contrast"></i></span>
+                        Dark High-Contrast
+                    </label>
+                </div>
+                
+                <div class="accessibility-option">
+                    <label>
+                        <input type="radio" name="colorMode" id="brightContrastToggle">
+                        <span class="accessibility-option-icon"><i class="fas fa-sun"></i></span>
+                        Bright High-Contrast
+                    </label>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary btn-block" id="resetAccessibility">Reset All Settings</button>
+        </div>
+    </div>
+
+    <!-- Virtual Keyboard - fixed to viewport bottom -->
+    <div class="virtual-keyboard" id="virtualKeyboard">
+        <div class="keyboard-container">
+            <div class="keyboard-row">
+                <div class="keyboard-key">1</div>
+                <div class="keyboard-key">2</div>
+                <div class="keyboard-key">3</div>
+                <div class="keyboard-key">4</div>
+                <div class="keyboard-key">5</div>
+                <div class="keyboard-key">6</div>
+                <div class="keyboard-key">7</div>
+                <div class="keyboard-key">8</div>
+                <div class="keyboard-key">9</div>
+                <div class="keyboard-key">0</div>
+            </div>
+            <div class="keyboard-row">
+                <div class="keyboard-key">Q</div>
+                <div class="keyboard-key">W</div>
+                <div class="keyboard-key">E</div>
+                <div class="keyboard-key">R</div>
+                <div class="keyboard-key">T</div>
+                <div class="keyboard-key">Y</div>
+                <div class="keyboard-key">U</div>
+                <div class="keyboard-key">I</div>
+                <div class="keyboard-key">O</div>
+                <div class="keyboard-key">P</div>
+            </div>
+            <div class="keyboard-row">
+                <div class="keyboard-key">A</div>
+                <div class="keyboard-key">S</div>
+                <div class="keyboard-key">D</div>
+                <div class="keyboard-key">F</div>
+                <div class="keyboard-key">G</div>
+                <div class="keyboard-key">H</div>
+                <div class="keyboard-key">J</div>
+                <div class="keyboard-key">K</div>
+                <div class="keyboard-key">L</div>
+                <div class="keyboard-key">←</div>
+            </div>
+            <div class="keyboard-row">
+                <div class="keyboard-key">Z</div>
+                <div class="keyboard-key">X</div>
+                <div class="keyboard-key">C</div>
+                <div class="keyboard-key">V</div>
+                <div class="keyboard-key">B</div>
+                <div class="keyboard-key">N</div>
+                <div class="keyboard-key">M</div>
+                <div class="keyboard-key">,</div>
+                <div class="keyboard-key">.</div>
+                <div class="keyboard-key">/</div>
+            </div>
+            <div class="keyboard-row">
+                <div class="keyboard-key space">Space</div>
+                <button class="keyboard-key voice-control"><i class="fas fa-microphone"></i></button>
+                <div class="keyboard-key">Enter</div>
+            </div>
+            <div class="keyboard-controls">
+                <div class="keyboard-resize">
+                    <button class="keyboard-resize-btn" id="keyboardDecrease">
+                        <i class="fas fa-search-minus"></i>
+                    </button>
+                    <span style="margin: 0 10px;">Size</span>
+                    <button class="keyboard-resize-btn" id="keyboardIncrease">
+                        <i class="fas fa-search-plus"></i>
+                    </button>
+                </div>
+                <button class="btn btn-sm btn-outline-secondary" id="keyboardClose">
+                    <i class="fas fa-times"></i> Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/popper.min.js"></script>
+    <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
+    
+    <!-- Accessibility JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    // Toggle accessibility panel
+    const toggleBtn = document.getElementById('accessibilityToggle');
+    const panel = document.getElementById('accessibilityPanel');
+    const keyboard = document.getElementById('virtualKeyboard');
+    
+    // Keyboard controls
+    const keyboardIncrease = document.getElementById('keyboardIncrease');
+    const keyboardDecrease = document.getElementById('keyboardDecrease');
+    const keyboardClose = document.getElementById('keyboardClose');
+    const voiceBtn = document.querySelector('.voice-control');
+    
+    // Voice recognition
+    let recognition = null;
+    let isListening = false;
+    
+    // Active element tracking
+    let activeElement = null;
+    let keyboardNavEnabled = false;
+    
+    // Carousel arrows fix
+    const carouselArrows = document.querySelectorAll('.carousel-control-prev, .carousel-control-next');
+    
+    // Set active element with focus
+    function setActiveElement(element) {
+        if (activeElement) {
+            activeElement.classList.remove('keyboard-focused');
+        }
+        
+        activeElement = element;
+        
+        if (activeElement) {
+            activeElement.classList.add('keyboard-focused');
+            activeElement.focus();
+            
+            // Show keyboard only if motor support is enabled
+            if (document.getElementById('motorToggle').checked) {
+                keyboard.style.display = 'block';
+            }
+        }
+    }
+    
+    // Initialize voice recognition
+    function initVoiceRecognition() {
+        try {
+            recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            recognition.lang = 'uk-UA';
+            
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                if (activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA')) {
+                    activeElement.value += transcript;
+                    const inputEvent = new Event('input', { bubbles: true });
+                    activeElement.dispatchEvent(inputEvent);
+                }
+            };
+            
+            recognition.onerror = function(event) {
+                console.error('Voice recognition error', event.error);
+                voiceBtn.innerHTML = '<i class="fas fa-microphone-slash"></i>';
+                voiceBtn.classList.remove('active');
+                isListening = false;
+            };
+            
+            recognition.onend = function() {
+                if (isListening) {
+                    recognition.start();
+                } else {
+                    voiceBtn.innerHTML = '<i class="fas fa-microphone"></i>';
+                    voiceBtn.classList.remove('active');
+                }
+            };
+        } catch (e) {
+            console.error('Voice recognition not supported', e);
+            voiceBtn.disabled = true;
+            voiceBtn.innerHTML = '<i class="fas fa-microphone-slash"></i>';
+        }
+    }
+    
+    // Setup keyboard navigation
+    function setupKeyboardNavigation() {
+        const focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+        let focusable = Array.from(document.querySelectorAll(focusableElements));
+        let currentIndex = -1;
+        
+        document.addEventListener('keydown', function(e) {
+            if (!keyboardNavEnabled) return;
+            
+            if (e.key === 'Tab') {
+                e.preventDefault();
+                currentIndex = (currentIndex + 1) % focusable.length;
+                focusable[currentIndex].focus();
+                setActiveElement(focusable[currentIndex]);
+            } else if (e.key === 'Enter' && document.activeElement) {
+                document.activeElement.click();
+            }
+        });
+        
+        // Update focusable elements when DOM changes
+        const observer = new MutationObserver(function() {
+            focusable = Array.from(document.querySelectorAll(focusableElements));
+        });
+        
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    }
+    
+    // Toggle accessibility panel
+    toggleBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const expanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', !expanded);
+        panel.style.display = expanded ? 'none' : 'block';
+        
+        // Ensure carousel arrows stay visible
+        carouselArrows.forEach(arrow => {
+            arrow.style.zIndex = expanded ? '10' : '20';
+        });
+    });
+    
+    // Close panel when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!panel.contains(e.target) && e.target !== toggleBtn) {
+            panel.style.display = 'none';
+            toggleBtn.setAttribute('aria-expanded', 'false');
+            
+            // Reset carousel arrows z-index
+            carouselArrows.forEach(arrow => {
+                arrow.style.zIndex = '10';
+            });
+        }
+    });
+    
+    // Accessibility profiles
+    const profileToggles = {
+        'blindnessToggle': 'accessibility-blindness',
+        'motorToggle': 'accessibility-motor',
+        'colorblindToggle': 'accessibility-colorblind',
+        'visuallyImpairedToggle': 'accessibility-visually-impaired',
+        'epilepsyToggle': 'accessibility-epilepsy',
+        'dyslexiaToggle': 'accessibility-dyslexia'
+    };
+    
+    Object.keys(profileToggles).forEach(toggleId => {
+        const toggle = document.getElementById(toggleId);
+        const className = profileToggles[toggleId];
+        
+        toggle.addEventListener('change', function(e) {
+            e.stopPropagation();
+            document.body.classList.toggle(className, this.checked);
+            savePreference(toggleId, this.checked);
+            
+            // Special handling for motor skills support
+            if (toggleId === 'motorToggle') {
+                if (this.checked && activeElement) {
+                    keyboard.style.display = 'block';
+                } else {
+                    keyboard.style.display = 'none';
+                }
+            }
+        });
+    });
+    
+    // У секції colorModes додаємо обробник для монохромного режиму
+const colorModes = {
+    'monochromeToggle': 'accessibility-monochrome',
+    'darkContrastToggle': 'accessibility-dark-contrast',
+    'brightContrastToggle': 'accessibility-bright-contrast'
+};
+
+Object.keys(colorModes).forEach(toggleId => {
+    const toggle = document.getElementById(toggleId);
+    const className = colorModes[toggleId];
+    
+    toggle.addEventListener('change', function(e) {
+        e.stopPropagation();
+        if (this.checked) {
+            // Remove all color mode classes first
+            Object.values(colorModes).forEach(mode => {
+                document.body.classList.remove(mode);
+            });
+            
+            // Special handling for monochrome mode
+            if (toggleId === 'monochromeToggle') {
+                document.body.classList.add(className);
+                // Force grayscale for all elements except accessibility controls
+                const style = document.createElement('style');
+                style.id = 'monochrome-style';
+                style.textContent = `
+                    body:not(.accessibility-monochrome) {
+                        filter: none !important;
+                    }
+                    body.accessibility-monochrome *:not(.accessibility-controls):not(.accessibility-panel):not(.accessibility-btn):not(.virtual-keyboard):not(.keyboard-key) {
+                        filter: grayscale(100%) !important;
+                    }
+                    .accessibility-controls, .accessibility-panel, 
+                    .accessibility-btn, .virtual-keyboard, 
+                    .keyboard-key {
+                        filter: none !important;
+                    }
+                `;
+                document.head.appendChild(style);
+            } else {
+                document.body.classList.add(className);
+                const existingStyle = document.getElementById('monochrome-style');
+                if (existingStyle) existingStyle.remove();
+            }
+            
+            savePreference('colorMode', className);
+        }
+    });
+});
+    
+    // Navigation toggles
+    document.getElementById('screenReaderToggle').addEventListener('change', function(e) {
+        e.stopPropagation();
+        savePreference('screenReader', this.checked);
+    });
+    
+    document.getElementById('keyboardNavToggle').addEventListener('change', function(e) {
+        e.stopPropagation();
+        keyboardNavEnabled = this.checked;
+        savePreference('keyboardNav', this.checked);
+        document.body.classList.toggle('keyboard-navigation', this.checked);
+    });
+    
+    document.getElementById('textReaderToggle').addEventListener('change', function(e) {
+        e.stopPropagation();
+        savePreference('textReader', this.checked);
+    });
+    
+    // Virtual keyboard functionality
+    document.querySelectorAll('.keyboard-key').forEach(key => {
+        key.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (!activeElement) return;
+            
+            const keyText = this.textContent;
+            
+            if (keyText === '←') {
+                // Backspace
+                if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
+                    activeElement.value = activeElement.value.slice(0, -1);
+                    activeElement.dispatchEvent(new Event('input', { bubbles: true }));
+                }
+            } 
+            else if (keyText === 'Space') {
+                // Space
+                if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
+                    activeElement.value += ' ';
+                    activeElement.dispatchEvent(new Event('input', { bubbles: true }));
+                }
+            } 
+            else if (keyText === 'Enter') {
+                // Enter
+                activeElement.click();
+            } 
+            else if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
+                // Regular key
+                activeElement.value += keyText;
+                activeElement.dispatchEvent(new Event('input', { bubbles: true }));
+            }
+        });
+    });
+    
+    // Voice control
+    voiceBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        
+        if (!recognition) {
+            initVoiceRecognition();
+        }
+        
+        if (isListening) {
+            recognition.stop();
+            isListening = false;
+        } else {
+            try {
+                recognition.start();
+                isListening = true;
+                voiceBtn.innerHTML = '<i class="fas fa-microphone-alt"></i> Говоріть...';
+                voiceBtn.classList.add('active');
+            } catch (err) {
+                console.error('Voice recognition error:', err);
+                voiceBtn.innerHTML = '<i class="fas fa-microphone-slash"></i> Помилка';
+                isListening = false;
+            }
+        }
+    });
+    
+    // Keyboard resize
+    keyboardIncrease.addEventListener('click', function(e) {
+        e.stopPropagation();
+        let currentScale = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--keyboard-scale')) || 1;
+        currentScale = Math.min(currentScale + 0.1, 1.5);
+        document.documentElement.style.setProperty('--keyboard-scale', currentScale);
+        savePreference('keyboardScale', currentScale);
+    });
+    
+    keyboardDecrease.addEventListener('click', function(e) {
+        e.stopPropagation();
+        let currentScale = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--keyboard-scale')) || 1;
+        currentScale = Math.max(currentScale - 0.1, 0.7);
+        document.documentElement.style.setProperty('--keyboard-scale', currentScale);
+        savePreference('keyboardScale', currentScale);
+    });
+    
+    keyboardClose.addEventListener('click', function(e) {
+        e.stopPropagation();
+        keyboard.style.display = 'none';
+        savePreference('keyboardVisible', false);
+    });
+    
+    // Handle clicks on interactive elements
+    document.addEventListener('click', function(e) {
+        if (e.target.tagName === 'BUTTON' || 
+            e.target.tagName === 'INPUT' || 
+            e.target.tagName === 'TEXTAREA' || 
+            e.target.tagName === 'SELECT' ||
+            (e.target.tagName === 'A' && e.target.getAttribute('href'))) {
+            
+            setActiveElement(e.target);
+        }
+    });
+    
+    // Reset all settings
+    document.getElementById('resetAccessibility').addEventListener('click', function(e) {
+        e.stopPropagation();
+        
+        // Reset profile toggles
+        Object.keys(profileToggles).forEach(toggleId => {
+            const toggle = document.getElementById(toggleId);
+            toggle.checked = false;
+            document.body.classList.remove(profileToggles[toggleId]);
+            localStorage.removeItem(toggleId);
+        });
+    
+        // Reset color modes
+        Object.keys(colorModes).forEach(toggleId => {
+            const toggle = document.getElementById(toggleId);
+            toggle.checked = false;
+            document.body.classList.remove(colorModes[toggleId]);
+        });
+        localStorage.removeItem('colorMode');
+    
+        // Reset navigation toggles
+        document.getElementById('screenReaderToggle').checked = false;
+        document.getElementById('keyboardNavToggle').checked = false;
+        document.getElementById('textReaderToggle').checked = false;
+        localStorage.removeItem('screenReader');
+        localStorage.removeItem('keyboardNav');
+        localStorage.removeItem('textReader');
+    
+        // Reset keyboard
+        keyboard.style.display = 'none';
+        document.documentElement.style.setProperty('--keyboard-scale', 1);
+        localStorage.removeItem('keyboardScale');
+        localStorage.removeItem('keyboardVisible');
+    
+        // Close panel
+        panel.style.display = 'none';
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        
+        // Reset active element
+        if (activeElement) {
+            activeElement.classList.remove('keyboard-focused');
+            activeElement = null;
+        }
+        
+        // Stop voice recognition
+        if (recognition && isListening) {
+            recognition.stop();
+            isListening = false;
+            voiceBtn.innerHTML = '<i class="fas fa-microphone"></i>';
+            voiceBtn.classList.remove('active');
+        }
+        
+        // Reset carousel arrows
+        carouselArrows.forEach(arrow => {
+            arrow.style.zIndex = '10';
+        });
+    });
+    
+    // Save preferences to localStorage
+    function savePreference(key, value) {
+        localStorage.setItem(key, JSON.stringify(value));
+    }
+    
+    // Load preferences from localStorage
+    function loadPreferences() {
+        // Load profile toggles
+        Object.keys(profileToggles).forEach(toggleId => {
+            const savedValue = localStorage.getItem(toggleId);
+            if (savedValue !== null) {
+                const toggle = document.getElementById(toggleId);
+                toggle.checked = JSON.parse(savedValue);
+                if (toggle.checked) {
+                    document.body.classList.add(profileToggles[toggleId]);
+                }
+            }
+        });
+    
+        // Load color mode
+        const savedColorMode = localStorage.getItem('colorMode');
+        if (savedColorMode) {
+            document.body.classList.add(JSON.parse(savedColorMode));
+            const toggleId = Object.keys(colorModes).find(
+                key => colorModes[key] === JSON.parse(savedColorMode)
+            );
+            if (toggleId) {
+                document.getElementById(toggleId).checked = true;
+            }
+        }
+    
+        // Load navigation toggles
+        const screenReader = localStorage.getItem('screenReader');
+        if (screenReader !== null) {
+            document.getElementById('screenReaderToggle').checked = JSON.parse(screenReader);
+        }
+    
+        const keyboardNav = localStorage.getItem('keyboardNav');
+        if (keyboardNav !== null) {
+            keyboardNavEnabled = JSON.parse(keyboardNav);
+            document.getElementById('keyboardNavToggle').checked = keyboardNavEnabled;
+            document.body.classList.toggle('keyboard-navigation', keyboardNavEnabled);
+        }
+    
+        const textReader = localStorage.getItem('textReader');
+        if (textReader !== null) {
+            document.getElementById('textReaderToggle').checked = JSON.parse(textReader);
+        }
+    
+        // Load keyboard settings
+        const keyboardScale = localStorage.getItem('keyboardScale');
+        if (keyboardScale !== null) {
+            document.documentElement.style.setProperty(
+                '--keyboard-scale',
+                JSON.parse(keyboardScale)
+            );
+        }
+    
+        const keyboardVisible = localStorage.getItem('keyboardVisible');
+        if (keyboardVisible !== null && JSON.parse(keyboardVisible) && 
+            document.getElementById('motorToggle').checked) {
+            keyboard.style.display = 'block';
+        }
+    }
+    
+    // Initialize
+    loadPreferences();
+    setupKeyboardNavigation();
+});
+    </script>
+</body>
+</html>
